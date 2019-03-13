@@ -30,3 +30,20 @@ plot(pressure)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 abcdefg
 hijklmnopqrstuv
+
+```{r}
+a <- 3
+b <- 4
+```
+
+```{r}
+60 + a
+```
+
+```{r}
+學期107總成績 <- 90
+```
+```{r}
+a <- 5
+a2 <- 5L
+```
