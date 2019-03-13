@@ -28,3 +28,21 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r}
+a <- 4
+```
+
+```{r}
+aVector<-c(5,6,7)
+```
+
+```{r}
+a2Vector<-c(5L,6L,7L)
+```
+
+```{r}
+class(a2Vector)
+```
+
