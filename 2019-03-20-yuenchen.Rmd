@@ -1,0 +1,83 @@
+---
+title: '2019-03-20'
+author: "yuenchen"
+date: "3/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+dialogue <- c('小明說："明天不用上課。"',
+               '小花說："真的嗎？"')
+
+cat(dialogue, sep="\n")
+```
+
+```{r}
+dialogue <- c("小明說：'明天不用上課。'",
+               "小花說：'真的嗎？'")
+
+cat(dialogue, sep="\n")
+```
+```{r}
+studentMajors <- factor(
+  c("經濟系", "經濟系", "法律系")
+)
+```
+
+```{r}
+studentMajors1 <-c("經濟系", "經濟系", "法律系")
+
+```
+```{r}
+class(studentMajors)
+```
+
+```{r}
+class(studentMajors1)
+```
+
+```{r}
+birthplace <- factor(
+  c("新北", "南部","新北", "台北","台北")
+)
+class(birthplace)
+levels(birthplace)
+as.integer(birthplace)
+```
+```{r}
+library(lubridate)
+```
+```{r}
+dtObject<-ymd_hms(
+  c("1970-01-01 00:02:53",
+    "1980-02-11 11:25:22") 
+)
+```
+
+```{r}
+dtObjectVector<-ymd_hms(
+  c("1970-01-01 00:02:53",
+    "1980-02-11 11:25:22")
+)
+```
+
+```{r}
+class(dtObject)
+```
+
+```{r}
+dtObject<-ymd_hms("1970-01-01 00:02:53") 
+```
+
+```{r}
+dtObject<-ymd_hms("2019-03-20 16:58:53") 
+
+class(dtObject)
+typeof(dtObject)
+as.double(dtObject)
+```
+
