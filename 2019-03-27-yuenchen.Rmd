@@ -28,3 +28,78 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(lubridate)
+```
+
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:55:00", tz="Asia/Taipei")
+```
+
+```{r}
+LisbonDateTime <- with_tz(twDateTime,tzone="Europe/Lisbon")
+```
+
+```{r}
+typeof(LisbonDateTime)
+levels(LisbonDateTime)
+as.integer(LisbonDateTime)
+```
+
+```{r}
+
+levels(LisbonDateTime)
+
+```
+
+
+
+```{r}
+a <- c(1, 5, -3)
+b <- c(0.5, 12, 2)
+```
+
+
+```{r}
+c <- 4
+
+c+a
+```
+
+```{r}
+a <- c(1, 5, -3)
+b <- c(0.5, 12, 2)
+aL <- c(1L, 5L, -3L)
+bL <- c(-2L, -4L, 8L)
+a+b
+aaL <- b+aL
+class(aaL)
+```
+```{r}
+x4 <- c(1,5,8)
+y4 <- c(5,8)
+
+x4 %in% y4
+```
+
+```{r}
+x3 <- c("小明","小花")
+y3 <- c("小明","小華")
+x3 %in% y3
+```
+
+
+```{r}
+x2 <- c(1,NA,10)
+y2 <- c(-1,NA,20)
+sum(x2)
+x3 <- c(NA,"小花")
+y3 <- c(NA,"小華")
+```
+
+
+is.na()
+```{r}
+is.na(x2)
+```
