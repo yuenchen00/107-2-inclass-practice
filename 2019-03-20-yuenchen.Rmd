@@ -41,11 +41,10 @@ class(studentMajors1)
 ```
 
 ```{r}
-birthplace <- factor(
-  c("新北", "南部","新北", "台北","台北")
-)
+birthplace <- factor(c("新北", "南部","新北", "台北","台北"))
 class(birthplace)
 levels(birthplace)
+typeof(birthplace)
 as.integer(birthplace)
 ```
 ```{r}
@@ -57,6 +56,27 @@ dtObject<-ymd_hms(
     "1980-02-11 11:25:22") 
 )
 ```
+
+```{r}
+bVector<-c("你好","How are you?")
+```
+
+
+
+
+```{r}
+birthplaces <- factor(c("桃園市","新竹市","澎湖島","台北市","蘭嶼"))
+typeof(birthplaces)
+levels(birthplaces)
+as.integer(birthplaces)
+```
+
+```{r}
+birth_place <- factor(c("臺東", "台北", "金門"))
+typeof(birth_place)
+as.integer(birth_place)
+```
+
 
 ```{r}
 dtObjectVector<-ymd_hms(
@@ -79,5 +99,10 @@ dtObject<-ymd_hms("2019-03-20 16:58:53")
 class(dtObject)
 typeof(dtObject)
 as.double(dtObject)
+```
+
+
+```{r}
+Sys.timezone()
 ```
 

@@ -55,6 +55,15 @@ bL <- c(-2L, -4L, 8L)
 ```
 
 ```{r}
+c <- 4
+
+c+a
+```
+
+
+
+
+```{r}
 a+bL
 class(a+bL)
 
@@ -98,7 +107,7 @@ twDateTime2 - twDateTime
 ```
 
 ```{r}
-twDateTime3 - twDateTime
+class(twDateTime3 - twDateTime)
 ```
 
 ```{r}
@@ -179,7 +188,7 @@ x4 %in% y4
 
 ```{r}
 x2 <- c(1,NA,10)
-y2 <- c(-1,NA,20)
+y2 <- c(-1,5,20)
 
 x3 <- c(NA,"小花")
 y3 <- c(NA,"小華")

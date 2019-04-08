@@ -84,9 +84,16 @@ levels(currency)
 ```{r}
 currency2 <- c("日元","美元","日元")
 currency2
+class(currency2)
 ```
 
+
+
+true  代表1 (出現日圓)
+false 代表0
+sum會把他們加總
 ```{r}
+currency2 == "日元"
 sum(currency2 == "日元")
 ```
 
@@ -105,8 +112,6 @@ greatTaipei <- c("台北市","新北市")
 x5 %in% greatTaipei
 ```
 
-
-
 ```{r}
 !(x5 %in% greatTaipei)
 ```
@@ -116,11 +121,6 @@ y5 <- c("女","男","女")
 
 y5=="女"
 ```
-
-
-
-
-
 
 
 ```{r}
@@ -203,11 +203,18 @@ isAfter19800801 <-
 isAfter19800801
 ```
 
+```{r}
+sum(date >= ymd("1980-08-01"))
+```
+
+
+
 
 ```{r}
 head(as.integer(date))
 as.integer(ymd("1980-08-01"))
 head(date >= ymd("1980-08-01"))
+
 ```
 
 ```{r}
