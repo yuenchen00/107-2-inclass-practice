@@ -118,6 +118,7 @@ str_c("https://github.com",username,reponame,sep="/")
 ```{r}
 "https://github.com"
 username[1:2]
+head (username)
 reponame[1:2]
 str_c("https://github.com",username[1:2],reponame[1:2],sep="/")
 
@@ -214,7 +215,8 @@ b2<-list(
   第一個="a",
   第二個="b",
   第三個=c(1:10),
-  哈=TRUE)
+  TRUE)
+b2
 ```
 
 ```{r}
