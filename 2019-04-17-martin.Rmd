@@ -46,12 +46,18 @@ plasticContainer <- list(
 )
 ```
 
-[[.]]
+```{r}
+plasticContainer$greenBox
+```
+
+
+[[.]]   取一個值的話建議用兩個括號
 ```{r}
 plasticContainer
 
 plasticContainer[["greenBox"]] 
-plasticContainer[[1]]
+plasticContainer[1]
+plasticContainer[c("greenBox","redBox")]
 ```
 
 [.]
@@ -63,15 +69,32 @@ plasticContainer[c(1,2)]
 ```
 
 
+雙括號是已經直接把東西拿出來擺在桌上
+單括號是只是打開看見綠盒子裡面有紙跟剪刀  會沿襲母體的種類 所以是list
+
 ```{r}
 plasticContainer
 
 
 extract1 <- plasticContainer[c("greenBox")]
 extract1
+class(extract1)
+#typeof(extract1)
 extract2 <- plasticContainer[[c("greenBox")]]
 extract2
+class(extract2)
 ```
+
+```{r}
+extract1[1][[1]][1]
+extract1[[1]][1]
+```
+
+```{r}
+extract2[1]
+```
+
+
 
 
 ```{r}
@@ -102,7 +125,9 @@ plasticContainer[["greenBox"]]
 ```
 
 ```{r}
-成績單$個經
+#成績單$個經  list才能用$
+成績單["個經"]
+成績單[["個經"]]
 ```
 
 ```{r}
@@ -165,5 +190,19 @@ logicorrect
 ```{r}
 favoriteTwo[logicorrect] -> validFavoriteTwo
 validFavoriteTwo
+```
+
+```{r}
+library(lubridate); library(stringr)
+```
+```{r}
+head(timeStamp)
+```
+
+```{r}
+ti <- dmy_hms (timeStamp)
+#hour(ti)->h
+#h>=1 & h <=5 ->z
+#z[[birthday]]
 ```
 

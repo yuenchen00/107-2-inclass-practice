@@ -104,6 +104,11 @@ commitCheck[[7]][["commit"]][["committer"]][["date"]]
 ```
 
 
+```{r}
+
+```
 
 
-
+```{r}
+commitCheckStatement
+```
