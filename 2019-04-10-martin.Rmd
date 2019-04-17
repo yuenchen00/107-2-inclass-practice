@@ -146,6 +146,7 @@ bday
 
 ```{r}
 birthday[1:2]
+typeof(birthday)
 y<-str_sub(birthday[1:2],1,4)
 m<-str_sub(birthday[1:2],5,6)
 d<-str_sub(birthday[1:2],7,8)
