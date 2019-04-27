@@ -103,7 +103,7 @@ twDateTime3 <- ymd_hms("2019-03-20 14:04:30", tz="Asia/Taipei")
 ```
 
 ```{r}
-twDateTime2 - twDateTime
+twDateTime2 - twDateTime3
 ```
 
 ```{r}
@@ -210,6 +210,8 @@ x2
 is.na(x2)
 ```
 
+
+na.rm就是remove na
 ```{r}
 sum(x2)
 sum(x2,na.rm=F)

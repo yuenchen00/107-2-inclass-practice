@@ -66,6 +66,7 @@ studentMajors
 
 ```{r}
 typeof(studentMajors)
+levels(studentMajors)
 ```
 
 
@@ -96,6 +97,7 @@ as.integer(birthplace)
 birthplace <- factor(
   c("台北市","台北市","台中市","台北市","台中市")
 )
+birthplace
 class(birthplace)
 levels(birthplace)
 as.integer(birthplace)

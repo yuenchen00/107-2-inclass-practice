@@ -10,6 +10,22 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
+aVector<-c(5,6,7)
+a2Vector<-c(5L,6L,7L)
+bVector<-c("你好","How are you?")
+b<-"你好"
+```
+
+```{r}
+class(aVector)
+class(a2Vector)
+class(bVector)
+class(b)
+```
+
+
+
+```{r}
 dialogue <- c('小明說："明天不用上課。"',
                '小花說："真的嗎？"')
 

@@ -48,6 +48,18 @@ as.integer(LisbonDateTime)
 ```
 
 ```{r}
+a<- ymd("2018-09-11")
+a
+b<- mdy("March 3, 2019")
+b
+```
+
+
+
+
+
+
+```{r}
 
 levels(LisbonDateTime)
 
@@ -62,7 +74,7 @@ b <- c(0.5, 12, 2)
 
 
 ```{r}
-c <- 4
+c <- c(4)
 
 c+a
 ```
@@ -76,6 +88,7 @@ a+b
 aaL <- b+aL
 class(aaL)
 ```
+
 ```{r}
 x4 <- c(1,5,8)
 y4 <- c(5,8)
