@@ -56,7 +56,10 @@ plasticContainer$greenBox
 plasticContainer
 
 plasticContainer[["greenBox"]] 
-plasticContainer[1]
+plasticContainer[1]   #有金錢符號標出greenbox
+
+
+plasticContainer[[1]]  #直接顯示paper跟scissor
 plasticContainer[c("greenBox","redBox")]
 ```
 
@@ -86,7 +89,7 @@ class(extract2)
 ```
 
 ```{r}
-extract1[1][[1]][1]
+extract1[[1]]
 extract1[[1]][1]
 ```
 
@@ -174,6 +177,11 @@ birthday <- filmVotingData$`出生西元年月日（驗證本人用）`
 timeStamp <- filmVotingData$Timestamp
 ```
 
+```{r}
+head(favoriteTwo)
+```
+
+
 
 ```{r}
 filmVotingData$Timestamp
@@ -198,6 +206,20 @@ library(lubridate); library(stringr)
 ```{r}
 head(timeStamp)
 ```
+```{r}
+library(stringr)
+str_split(favoriteTwo,", ") -> favoriteTwoList  # 將選擇的兩片split成兩個元素
+unlist(favoriteTwoList) -> allVotes # 將list堆疊成atomic vector
+table(allVotes) # 計算每個類別的次數
+```
+
+
+```{r}
+#favoriteTwo
+#favoriteTwoList
+allVotes
+```
+
 
 ```{r}
 ti <- dmy_hms (timeStamp)
