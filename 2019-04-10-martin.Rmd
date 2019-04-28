@@ -60,6 +60,9 @@ char1
 day 
 char2
 str_c(month,char1,day,char2)
+
+
+str_c(month,day, sep="-")
 ```
 
 ```{r}
@@ -69,6 +72,13 @@ str_c(month,c("月"),day,c("日"))
 ```{r}
 str_c(month,"月",day,"日")
 ```
+
+```{r}
+dates <- c("3-11", "4-5",  "2-7")
+str_split(dates,"-")
+```
+
+
 
 
 ```{r}
