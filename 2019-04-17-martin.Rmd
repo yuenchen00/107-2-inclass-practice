@@ -130,6 +130,8 @@ plasticContainer[["greenBox"]]
 ```{r}
 #成績單$個經  list才能用$
 成績單["個經"]
+成績單[1
+    ]
 成績單[["個經"]]
 ```
 
@@ -171,6 +173,7 @@ with_tz(commitDate,tzone="Asia/Taipei")
 
 ```{r}
 library(readr)
+library(stringr)
 filmVotingData <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/podcastcompetition3.csv")
 str_replace(filmVotingData$請選擇你最喜歡的影片二部,", by"," by") -> favoriteTwo
 birthday <- filmVotingData$`出生西元年月日（驗證本人用）`
@@ -200,12 +203,31 @@ favoriteTwo[logicorrect] -> validFavoriteTwo
 validFavoriteTwo
 ```
 
+
 ```{r}
-library(lubridate); library(stringr)
+head(birthday)
+str_sub(birthday,1,4) ->ye
+as.integer(ye) ->ye
+ye
+table(ye)
 ```
+
+
+先判斷凌晨一點到早上五點的投票人
 ```{r}
-head(timeStamp)
+str_sub(timeStamp,12,13) ->a
+str_replace(a,":","") ->o
+o
+as.integer(o)->o
+o>=1 & o<=5 ->c
+c
+ye[c] ->p
+table(p)
 ```
+
+
+
+
 ```{r}
 library(stringr)
 str_split(favoriteTwo,", ") -> favoriteTwoList  # 將選擇的兩片split成兩個元素
@@ -215,16 +237,11 @@ table(allVotes) # 計算每個類別的次數
 
 
 ```{r}
-#favoriteTwo
-#favoriteTwoList
-allVotes
+head(favoriteTwo)
+head(favoriteTwoList)
+head(allVotes)
 ```
 
 
-```{r}
-ti <- dmy_hms (timeStamp)
-#hour(ti)->h
-#h>=1 & h <=5 ->z
-#z[[birthday]]
-```
+
 

@@ -31,6 +31,7 @@ object extraction
 Mat1
 Mat1[[2]]
 Mat1[[6]]
+Mat1[c(2,5)]
 ```
 
 ```{r}
@@ -77,7 +78,7 @@ typeof(StuDF)
 
 ```{r}
 StuDF
-StuDF[["姓名"]][[3]]
+StuDF[["姓名"]][[3]]     #因為是factor所以會有level
 ```
 
 ```{r}
@@ -163,11 +164,15 @@ matObj1[[8]]
 
 ```{r}
 matObj1[3,2]
+matObj1[,2]
 ```
 
 ```{r}
 matObj1
-matObj1[c(1,4),c(2,3)]
+matObj1[c(1,4),c(2,3)]  #取橫排1.4 再取直排2.3  交集的部分
+
+matObj1[c(5,4)]   #從[,1]開始數 取第5跟第4個
+
 ```
 
 ```{r}

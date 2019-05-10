@@ -8,12 +8,23 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r}
+library(lubridate)
+```
+
+```{r}
+dtObject<-ymd_hms("1970-01-01 00:02:53") 
+class(dtObject)
+typeof(dtObject)
+```
+
+
 
 ```{r}
 dialogue <- c('小明說："明天不用上課。"',
                '小花說："真的嗎？"')
 
-cat(dialogue, sep="\n")
+cat(dialogue)
 ```
 
 ```{r}
@@ -39,6 +50,7 @@ sum(aLogical)
 
 ```{r}
 studentMajors0 <- c("經濟系", "經濟系", "法律系")
+levels(studentMajors0)
 ```
 
 

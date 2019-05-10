@@ -87,6 +87,7 @@ twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
 twDateTime
 
 twDateTime+1
+twDateTime+ days(1)
 ```
 
 
