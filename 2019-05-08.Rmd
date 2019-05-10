@@ -1,0 +1,233 @@
+---
+title: '2019-05-08'
+author: "林茂廷"
+date: "5/8/2019"
+output: html_document
+---
+
+## 期中考
+
+## ans1
+
+```{r}
+library(lubridate); library(stringr); library(dplyr); library(readr); library(purrr)
+```
+
+```{r}
+x <- as.character(round(runif(10)*100),10)
+x
+```
+
+```{r}
+as.integer(x) > 50 -> logicBig
+logicBig
+```
+
+## ans4
+
+```{r}
+randomGrades <- sample(40:80,15,replace = T)
+randomCredits <- sample(0:3,15,replace=T)
+data3 <- list(
+  成績=randomGrades,
+  學分數=randomCredits
+)
+```
+
+```{r}
+data3
+```
+
+
+```{r}
+logiPass <- (data3$成績 >= 60 )
+logiPass
+
+a <- data3$成績[logiPass]
+b <- data3$學分數[logiPass]
+passData <- list(
+  成績= a ,
+  學分數= b
+)
+passData
+```
+
+
+## ans5
+
+```{r}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+twDates
+```
+
+
+### ans51
+```{r}
+str_replace(twDates,"民國","") -> x1
+x1
+str_replace(x1,"月","") -> twDates2
+twDates2
+```
+
+
+```{r}
+str_replace_all(twDates,"(民國)|(月)","")
+```
+
+
+### ans52
+
+```{r}
+twDates
+str_sub(twDates,3,5) -> yearCharacter
+yearCharacter
+```
+
+```{r}
+as.integer(yearCharacter)+1911 -> westYears
+westYears
+```
+
+
+### ans53
+
+```{r}
+twDates2
+str_split(twDates2,"年") -> datesSplitList # 用年切開 年 月值
+datesSplitList
+
+map(datesSplitList,~.[[2]]) -> monthList # 選出每個元素的第二個值
+monthList
+
+unlist(monthList) -> monthVector # 將list疊成字串向量
+monthVector
+
+str_c(as.character(westYears),monthVector,"01",sep = "-") -> westDates # 貼成YYYY-MM-DD 字串格式
+westDates
+
+ymd(westDates) -> westDates # 轉成dates
+westDates
+class(westDates)
+```
+
+# 7
+
+```{r}
+load("~/Desktop/GitHub/course-107-2-programming-for-data-science/exam/sampledTranscriptData.Rda")
+names(sampledTranscriptData) <- 
+  c('學號','學期成績','學分數','學年','學期','必選修類別（必／選／通）','系級','科目名稱','年級','學屆')
+```
+
+
+
+```{r}
+load("sampledTranscriptData.Rda")
+names(sampledTranscriptData) <- 
+  c('學號','學期成績','學分數','學年','學期','必選修類別（必／選／通）','系級','科目名稱','年級','學屆')
+```
+
+
+## ans71
+
+```{r}
+(sampledTranscriptData$科目名稱 == "科目204") -> logicChosenSubject
+length(logicChosenSubject)
+sum(logicChosenSubject)
+(sampledTranscriptData$科目名稱 == "科目204" & 
+    sampledTranscriptData$學期成績 < 60) -> logicChosenSubjectAndFail
+length(logicChosenSubjectAndFail)
+sum(logicChosenSubjectAndFail)
+sum(logicChosenSubjectAndFail)/sum(logicChosenSubject) -> failRate
+failRate
+```
+
+
+```{r}
+(sampledTranscriptData$科目名稱 == "科目204") -> chosenSubjectLogi
+length(chosenSubjectLogi)
+sum(chosenSubjectLogi)
+sampledTranscriptData$學期成績[chosenSubjectLogi] -> chosenGrades
+length(chosenGrades)
+sum(chosenGrades<60)/length(chosenGrades) -> failRate
+
+failRate
+```
+
+## ans72
+
+```{r}
+sampledTranscriptData$學屆 <- 
+  str_sub(sampledTranscriptData$學號,2,4)
+sampledTranscriptData$系碼 <- 
+  str_sub(sampledTranscriptData$學號,5,6)
+tail(sampledTranscriptData$學號) # or head()
+tail(sampledTranscriptData$系碼) # or head()
+#sampledTranscriptData
+```
+
+## ans73
+
+```{r}
+## ----ans73---------------------------------------------------------------
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$系級,"1","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"2","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"3","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"4","")
+
+head(sampledTranscriptData$系級)
+head(sampledTranscriptData$學系)
+```
+
+```{r}
+## ----ans73---------------------------------------------------------------
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$系級,"[1234]","")
+
+sampledTranscriptData$學系 
+```
+
+```{r}
+## ----ans73---------------------------------------------------------------
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$系級,"[:digit:]","")
+
+sampledTranscriptData$學系 
+
+```
+
+## ans74
+
+```{r}
+## ----ans74---------------------------------------------------------------
+(sampledTranscriptData$系碼!="73" & 
+   sampledTranscriptData$學系=="經濟學系") -> logiCheck
+
+sampledTranscriptData$學號[logiCheck] 
+
+unique(sampledTranscriptData$學號[logiCheck]) -> changeMajorStudent
+
+changeMajorStudent
+```
+
+```{r}
+list(
+  學系=,
+  系碼=
+)
+
+```
+
+## ans75
+
+```{r}
+## ----ans75---------------------------------------------------------------
+(sampledTranscriptData$學號 == "410073409b" &
+  sampledTranscriptData$學年==101 &
+  sampledTranscriptData$學期==1) -> logiSelect
+  
+sum(sampledTranscriptData$學分數[logiSelect]*
+  sampledTranscriptData$學期成績[logiSelect])/sum(sampledTranscriptData$學分數[logiSelect]) -> studentGPA
+
+studentGPA
+```
+
