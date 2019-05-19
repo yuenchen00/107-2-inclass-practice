@@ -176,7 +176,7 @@ StuDF <- data.frame(
 ```
 
 ```{r}
-StuDF[c("成績","及格")] <- data.frame(c(75,55,85,65,45),as.integer("成績") >=60)
+StuDF[c("成績","及格")] <- data.frame(c(75,55,85,65,45),as.double("成績") >=60)
 StuDF
 
 ```
@@ -189,5 +189,11 @@ utility_cobb_douglass <- function(x,y,.alpha,.beta){
 
 ```{r}
 utility_cobb_douglass(1,2,0.5,0.8)
+```
+```{r}
+demand_fun <- function(c,d,P){
+  Qd <- c-d*P
+  return(Qd)
+}
 ```
 

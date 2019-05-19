@@ -127,11 +127,15 @@ exData3 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/mas
                       匯率 = col_number(),
                       期間 = col_character()))
 names(exData3)
+colnames(exData3)
+
 ```
 
 
 ```{r}
+exData3
 class(exData3$期間)
+head(exData3$期間)
 ```
 
 ```{r}
@@ -182,12 +186,14 @@ transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/git
 ```
 
 ```{r}
+transcriptDataFinal
 names(transcriptDataFinal)
 ```
 
 學號“92aS67fee”子樣本
 ```{r}
-
+log<-transcriptDataFinal$學號=="92aS67fee"
+transcriptDataFinal[log,]
 ```
 
 
