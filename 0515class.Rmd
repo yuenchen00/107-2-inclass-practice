@@ -67,3 +67,127 @@ utility_cobb_douglass <- function(x,y,.alpha,.beta){
 utility_cobb_douglass(1,2,0.5,0.8)
 ```
 
+```{r}
+Mat1 <- matrix(
+  c(1:6), 2,3
+)
+Mat1
+```
+
+```{r}
+class(Mat1)
+typeof(Mat1)
+```
+
+```{r}
+StuDF <- data.frame(
+  學號=c(172,214,322,425,517),
+  姓名=c("小明","大雄","胖虎","小新","大白"),
+  成績=c(80,60,90,70,50)
+  )
+StuDF 
+```
+```{r}
+class(StuDF$姓名)
+
+StuDF$姓名 <- as.character(StuDF$姓名)
+class(StuDF$姓名)
+```
+```{r}
+StuList <- list(
+  學號=c(172,214,322,425,517),
+  姓名=c("小明","大雄","胖虎","小新","大白"),
+  成績=c(80,60,90,70,50)
+  )
+StuList 
+```
+
+```{r}
+class(StuList)
+as.data.frame(StuList) -> StuDF3
+
+class(StuDF3)
+StuDF3
+as.data.frame(StuList,stringsAsFactors = F) -> StuDF4
+class(StuDF4)
+StuDF4
+```
+
+```{r}
+LETTERS # R內設元素值為英文字母群的character vector
+chosenLETTERS <- LETTERS[1:15]
+matObj1 <- matrix(chosenLETTERS,5,3)
+matObj1
+```
+
+```{r}
+
+matObj1[3,2] 
+matObj1[c(F,F,TRUE,F,F),c(F,TRUE,F)]
+matObj1[c(1,5),c(2,3)]
+
+
+
+```
+```{r}
+StuDF
+StuDF[,c("姓名","成績")]
+```
+```{r}
+Vector1 <- letters[1:6]
+Vector1
+
+names(Vector1)
+```
+
+```{r}
+rownames(matObj1) <- c('行：1','行：2','行：3','行：4','行：5')
+colnames(matObj1) <-c('欄位1','欄位2','欄位3')
+
+matObj1
+matObj1[c("行：1","行：3"),]
+```
+
+```{r}
+b <- list(
+  元素1=1,
+  元素2="Hello",
+  元素3=TRUE
+)
+```
+
+```{r}
+b[c("元素1",3)]<-list("false",7) 
+b
+```
+```{r}
+a2 <- c(2,5,10)
+a2
+a2[c(3,7)] <- c(-1,0)
+a2
+```
+
+```{r}
+StuDF <- data.frame(
+  學號=c(172,214,322,425,517),
+  姓名=c("小明","大雄","胖虎","小新","大白"),
+  成績=c(80,60,90,70,50)
+  )
+```
+
+```{r}
+StuDF[c("成績","及格")] <- data.frame(c(75,55,85,65,45),as.integer("成績") >=60)
+StuDF
+
+```
+```{r}
+utility_cobb_douglass <- function(x,y,.alpha,.beta){
+  utilValue <- x^.alpha*y^.beta # 程序產生output值
+  return(utilValue) # 傳回output值
+}
+```
+
+```{r}
+utility_cobb_douglass(1,2,0.5,0.8)
+```
+
