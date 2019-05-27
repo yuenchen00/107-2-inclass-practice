@@ -1,0 +1,84 @@
+---
+title: "0522class"
+author: "yuenchen"
+date: "2019年5月22日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+```{r}
+library(readr)
+invoiceList <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/invoiceList.csv",
+col_types = cols(訂單時間.以訂單時區顯示. = col_character()))
+names(invoiceList)[[2]] <- "訂單時區之下單時間"
+```
+
+```{r}
+(invoiceList$訂單時區=="America/New_York") -> nyLogical
+(invoiceList$訂單時區=="Asia/Taipei") -> tpLogical
+
+invoiceList$nyLogical <- nyLogical
+invoiceList$tpLogical <- tpLogical
+
+library(lubridate)
+nyDateTime <- ymd_hms(invoiceList$訂單時區之下單時間[nyLogical],
+                      tz="America/New_york")
+
+invoiceList$UTC時間[nyLogical] <-
+  with_tz(nyDateTime,tzone="UTC")
+tpDateTime <- ymd_hms(invoiceList$`訂單時區之下單時間`[tpLogical],
+          tz="Asia/Taipei") 
+
+invoiceList$UTC時間[tpLogical] <-
+  with_tz(tpDateTime,tzone="UTC")
+invoiceList
+```
+
+請把以America/New_York時區輸入的時間字串"1973-02-21 12:05:22"，轉成date time class, 再改成Asia/Taipei時間顯示。
+
+
+
+```{r}
+ymd_hms("1973-02-21 12:05:22",tz="America/New_York") ->a
+with_tz(a,tz="Asia/Taipei")
+```
+
+```{r}
+library(stringr)
+date_convert_twYM <- function(twdate, day=14){
+  yyyy<-as.integer(str_extract(twdate,"(?<=(民國))[:digit:]+"))+1911 
+  mm<-str_extract(twdate,"[:digit:]+(?=月)")
+  yyyymmdd <- ymd(str_c(yyyy,mm,day,sep="-"))
+
+  return(yyyymmdd)
+}
+
+date_convert_twYM("民國108年5月")
+date_convert_twYM(twDate, 04)
+```
+
