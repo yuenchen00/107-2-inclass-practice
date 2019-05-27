@@ -1,0 +1,289 @@
+---
+title: '2015-05-22'
+author: "林茂廷"
+date: "5/22/2019"
+output: html_document
+---
+
+## midterm 6.2
+
+```{r}
+library(readr)
+invoiceList <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/invoiceList.csv",
+col_types = cols(訂單時間.以訂單時區顯示. = col_character()))
+names(invoiceList)[[2]] <- "訂單時區之下單時間"
+```
+
+```{r}
+(invoiceList$訂單時區=="America/New_York") -> nyLogical
+(invoiceList$訂單時區=="Asia/Taipei") -> tpLogical
+
+invoiceList$nyLogical <- nyLogical
+invoiceList$tpLogical <- tpLogical
+
+library(lubridate)
+ymd_hms(invoiceList$`訂單時區之下單時間`[nyLogical],
+          tz="America/New_York") -> nyDateTime
+
+invoiceList$UTC時間[nyLogical] <-
+  with_tz(nyDateTime,tzone="UTC")
+
+ymd_hms(invoiceList$訂單時區之下單時間[tpLogical],
+        tz="Asia/Taipei") -> tpDateTime
+
+invoiceList$UTC時間[tpLogical] <- with_tz(tpDateTime,tz="UTC")
+```
+
+
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+
+gpa_fun <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(GPA)
+}
+```
+
+```{r}
+gpa_fun("479W9ee8e")
+gpa_fun("9efW9aea5")
+```
+
+
+
+ymd_hms_tzChange(input,fromTzone,toTzone)
+
+input: a character. such as "1973-02-21 12:05:22"
+fromTzone: a character. timezone of input.
+toTzone: a character. timeezone of output.
+
+return value: a date time with toTzone expression.
+
+```{r}
+ymd_hms_tzChange("1973-02-21 12:05:22",
+                 "American/New_York",
+                 "Asia/Taipei")
+```
+
+請把以America/New_York時區輸入的時間字串"1973-02-21 12:05:22"，轉成date time class, 再改成Asia/Taipei時間顯示。
+
+```{r}
+library(lubridate)
+ymd_hms("1973-02-21 12:05:22", tz="America/New_York") -> fromDateTime
+with_tz(fromDateTime,tzone="Asia/Taipei") -> toDateTime
+toDateTime
+```
+
+```{r}
+ymd_hms_tzChange <- function(input,fromTzone,toTzone){
+  time1 <- ymd_hms(input,tz=fromTzone)
+  answer <- with_tz(time1,tzone = toTzone)
+  return(answer)
+}
+ymd_hms_tzChange("1973-02-21 12:05:22","America/New_York","Asia/Taipei")
+```
+
+
+```{r}
+(invoiceList$訂單時區=="America/New_York") ->
+  nyLogical
+(invoiceList$訂單時區=="Asia/Taipei") -> 
+  tpLogical
+
+library(lubridate)
+
+ymd_hms_tzChange(
+  invoiceList$`訂單時區之下單時間`[nyLogical],
+  "America/New_York",
+  "UTC") -> invoiceList$UTC時間[nyLogical]
+
+ymd_hms_tzChange(
+  invoiceList$`訂單時區之下單時間`[nyLogical],
+  fromTzone = "America/New_York",
+  toTzone = "UTC") -> invoiceList$UTC時間[nyLogical]
+
+ymd_hms_tzChange(
+  invoiceList$`訂單時區之下單時間`[nyLogical],
+  fromTzone = "America/New_York",
+  toTzone = "UTC"
+)
+
+
+# ymd_hms(invoiceList$`訂單時區之下單時間`[nyLogical],
+#           tz="America/New_York") -> nyDateTime
+# invoiceList$UTC時間[nyLogical] <-
+#   with_tz(nyDateTime,tzone="UTC")
+
+ymd_hms_tzChange(
+  invoiceList$`訂單時區之下單時間`[tpLogical],
+  "Asia/Taipei",
+  "UTC") -> invoiceList$UTC時間[tpLogical]
+
+
+# ymd_hms(invoiceList$訂單時區之下單時間[tpLogical],
+#         tz="Asia/Taipei") -> tpDateTime
+# invoiceList$UTC時間[tpLogical] <- with_tz(tpDateTime,tz="UTC")
+```
+
+```{r}
+ymd_hms_tzChange <- function(input,fromTzone,toTzone){
+  ymd_hms(input,tz=fromTzone) -> fromDateTime 
+  with_tz(fromDateTime,tzone=toTzone) ->toDateTime
+  return(toDateTime) 
+}
+ymd_hms()
+with_tz(tzone)
+```
+
+
+錯誤
+```
+ymd_hms_tzChange <- function(date, TZ1, TZ2){
+  nyDT2 <- ymd_hms("1973-02-21 12:05:22", tz=TZ1)
+  tpDT2 <- with_tz(nyDT2, tz=TZ2)
+  return(tpDT2)
+  }
+```
+
+更正
+```{r}
+ymd_hms_tzChange <- function(date, TZ1, TZ2){
+  nyDT2 <- ymd_hms(date, tz=TZ1)
+  tpDT2 <- with_tz(nyDT2, tzone=TZ2)
+  return(tpDT2)
+  }
+```
+
+## 民國年月
+
+```{r}
+library(stringr)
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+twDates
+```
+
+```{r}
+twDates
+library(stringr); library(lubridate)
+```
+
+原始步驟
+```{r}
+yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+mm<-str_extract(twDates,"[:digit:]+(?=月)")
+yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+yyyymmdd
+```
+
+寫成函數
+```{r}
+date_convert_twYM <- function(twDates){
+  #twDates
+  yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+  mm<-str_extract(twDates,"[:digit:]+(?=月)")
+  yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+  return(yyyymmdd)
+}
+
+```
+
+```{r}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates_New
+twDates_New
+date_convert_twYM(twDates_New)
+```
+
+
+錯誤
+```
+date_convert_twYM<-function(x){
+  yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+mm<-str_extract(twDates,"[:digit:]+(?=月)")
+yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+return(yyyymmdd)
+}
+```
+
+更正
+```
+date_convert_twYM<-function(x){
+  yyyy<-as.integer(str_extract(x,"(?<=(民國))[:digit:]+"))+1911
+mm<-str_extract(x,"[:digit:]+(?=月)")
+yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+return(yyyymmdd)
+}
+```
+
+## 預設
+
+```{r}
+utility_cobb_douglass2 <- function(x,y,.alpha=0.5,.beta=0.5){
+  utilValue <- x^.alpha*y^.beta
+  return(utilValue)
+}
+```
+
+```{r}
+utility_cobb_douglass2(1,2) # 使用預設值
+utility_cobb_douglass2(1,2,0.5,0.8) # 自定參數值
+```
+
+
+原始步驟
+```{r}
+yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+mm<-str_extract(twDates,"[:digit:]+(?=月)")
+yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+yyyymmdd
+```
+
+沒有預設值
+```{r}
+date_convert_twYM <- function(twDates){
+  #twDates
+  yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+  mm<-str_extract(twDates,"[:digit:]+(?=月)")
+  yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+  return(yyyymmdd)
+}
+```
+
+有預設值
+```{r}
+date_convert_twYM <- function(twDates,dd="01"){
+  yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+  mm<-str_extract(twDates,"[:digit:]+(?=月)")
+  yyyymmdd <- ymd(str_c(yyyy,mm,dd,sep="-"))
+  yyyymmdd
+}
+```
+
+```{r}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates_New
+
+twDates_New
+date_convert_twYM(twDates_New)
+date_convert_twYM(twDates_New,dd="04")
+```
+
+
+
+
+
+
+
+
+
