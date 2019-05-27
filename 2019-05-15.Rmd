@@ -133,7 +133,7 @@ colnames(exData3)
 
 
 ```{r}
-exData3
+exData3    #有一些吃廖的匯率本來就是NA
 class(exData3$期間)
 head(exData3$期間)
 ```
