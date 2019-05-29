@@ -31,25 +31,39 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 
 ```{r}
-a <- 4
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
 ```
 
 ```{r}
-aVector<-c(5,6,7)
+gpa_fun <- function(studentID){
+  if (transcriptDataFinal$學號==studentID){   #錯誤 會跑出一對true/false
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(GPA)}
+  else{
+    message("no number")
+  }
+}
 ```
 
 ```{r}
-a2Vector<-c(5L,6L,7L)
+
 ```
 
 ```{r}
-class(a2Vector)
+
 ```
 
 
 ```{r}
 textbookURL<-function(){
 browseURL("https://bookdown.org/tpemartin/ntpu-programming-for-data-science/function-and-conditional-execution.html#section-8.1")}
-textbookURL()
+#textbookURL()
 ```
 
