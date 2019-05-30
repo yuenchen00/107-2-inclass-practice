@@ -53,11 +53,15 @@ gpa_fun <- function(studentID){
 ```
 
 ```{r}
-
+utility_cobb_douglass2 <- function(x,y,.alpha=0.5,.beta=0.5){
+  utilValue <- x^.alpha*y^.beta
+  return(utilValue)
+}
 ```
 
 ```{r}
-
+utility_cobb_douglass2(1,2) # 使用預設值
+utility_cobb_douglass2(1,2,0.5,0.5) # 自定參數值
 ```
 
 
@@ -65,5 +69,32 @@ gpa_fun <- function(studentID){
 textbookURL<-function(){
 browseURL("https://bookdown.org/tpemartin/ntpu-programming-for-data-science/function-and-conditional-execution.html#section-8.1")}
 #textbookURL()
+```
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+```
+
+
+```{r}
+gpa_fun2 <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(
+    list(
+      平均成績=GPA,
+      成績單=subSample
+      )
+  )
+}
+```
+
+```{r}
+gpa_fun2("92aS67fee")
 ```
 
