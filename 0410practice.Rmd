@@ -1,7 +1,7 @@
 ---
 title: "practice"
 author: "chia"
-date: "2019�?3???13?��"
+date: "2019???3???13???"
 output: html_document
 ---
 
@@ -69,6 +69,49 @@ reponame <- githubData$`GitHub repo name`[11:16]
 str_c("http://github.com/",username,"/",reponame)
 ```
 
+```{r}
+StuDF <- data.frame(
+  學號=c(172,214,322,425,517),
+  姓名=c("小明","大雄","胖虎","小新","大白"),
+  成績=c(80,60,90,70,50)
+  )
+StuDF 
+```
+```{r}
+StuDF[c("成績","及格")] <- data.frame(c(75,55,85,65,45),c(T,F,T,T,F))
+StuDF
+```
 
+
+
+
+```{r}
+StuDF
+StuDF[c("姓名","成績")] 
+StuDF[1:5,c("姓名","成績")] 
+```
+```{r}
+
+```
+
+
+```{r}
+LETTERS # R內設元素值為英文字母群的character vector
+chosenLETTERS <- LETTERS[1:15]
+matObj1 <- matrix(chosenLETTERS,5,3)
+matObj1
+```
+```{r}
+StuDF[4,c("成績","姓名")]
+StuDF[4,3]
+```
+
+```{r}
+
+```
+
+```{r}
+matObj1[,3]
+```
 
 

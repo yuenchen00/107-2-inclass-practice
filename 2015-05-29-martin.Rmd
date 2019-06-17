@@ -186,7 +186,7 @@ supply_fun4 <- function(P,a,b){
     return(Qs)
   }
 }
-supply_fun4(P=-1,-3,1)
+supply_fun4(P=-1,-3,1)  ->j
 supply_fun4(P=2,-3,1)
 supply_fun4(P=3,-3,1)
 ```
@@ -328,7 +328,7 @@ transcriptDataFinal[transcriptDataFinal$學號 != "92aS67fee",] ->
 ```
 
 ```{r}
-gpa_fun("92aS67fee") # 顯示82.85276
+gpa_fun("92aS67fee") # 原先顯示82.85276 被踢除後就顯現不出資料了
 
 ```
 

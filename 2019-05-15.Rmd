@@ -24,6 +24,7 @@ names(Vector1)
 ```
 
 ```{r}
+Vector1
 Vector1[["名稱4"]]
 ```
 
@@ -41,6 +42,7 @@ StuDF2
 
 ```{r}
 colnames(StuDF2)
+rownames(StuDF2)
 names(StuDF2)
 ```
 
@@ -58,6 +60,12 @@ StuDF2
 
 ```
  
+```{r}
+colnames(StuDF2)[[2]] <- "nameee"
+colnames(StuDF2)
+StuDF2
+
+```
 
 改col2,3的名稱
 ```{r}
@@ -94,7 +102,7 @@ b <- list(
   元素3=TRUE
 )
 b
-b[[3]] <- FALSE
+b[[3]] <- "FSE"
 b
 ```
 
@@ -158,6 +166,7 @@ class(exData3$isAsiaCrisis)
 ```{r}
 logiAsiaCrisis <- exData3$isAsiaCrisis
 exData3[logiAsiaCrisis, ]
+#exData3[logiAsiaCrisis]   錯誤寫法
 ```
 
 或合寫在一起
@@ -194,6 +203,8 @@ names(transcriptDataFinal)
 ```{r}
 log<-transcriptDataFinal$學號=="92aS67fee"
 transcriptDataFinal[log,]
+transcriptDataFinal$學期[log,]
+transcriptDataFinal$學期[log]
 ```
 
 

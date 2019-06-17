@@ -31,7 +31,7 @@ object extraction
 Mat1
 Mat1[[2]]
 Mat1[[6]]
-Mat1[c(2,5)]
+Mat1[c(2,1,6)]
 ```
 
 ```{r}
@@ -122,7 +122,7 @@ StuDF3
 ```
 
 ```{r}
-as.data.frame(StuList,stringsAsFactors = F) -> StuDF4
+as.data.frame(StuList,stringsAsFactors = F) -> StuDF4   #預設自動轉factor
 class(StuDF4)
 
 ```
@@ -172,7 +172,7 @@ matObj1
 matObj1[c(1,4),c(2,3)]  #取橫排1.4 再取直排2.3  交集的部分
 
 matObj1[c(5,4)]   #從[,1]開始數 取第5跟第4個
-
+matObj1[c(5,4),]
 ```
 
 ```{r}
@@ -195,7 +195,7 @@ class(classSurvey)
 # classSurvey[,]
 classSurvey[c(1:60),c(4,5)]
 classSurvey[c(1:60),c(F,F,F,T,T,F)]
-classSurvey[,4:5]
+classSurvey[,4:5]   #沒打就是全取
 classSurvey[,c(4,5)]
 classSurvey[,c(F,F,F,T,T,F)]
 ```

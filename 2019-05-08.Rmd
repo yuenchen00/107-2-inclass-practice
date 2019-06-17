@@ -37,6 +37,15 @@ data3 <- list(
 ```{r}
 data3
 ```
+```{r}
+logiPass <- (data3$成績 >= 60 )
+logiPass
+
+data3$成績[logiPass]  #預設是T
+#data3$成績$logiPass
+```
+
+
 
 
 ```{r}
@@ -58,7 +67,7 @@ passData
 ```{r}
 sample(99:103,15,replace = T)-> yy
 sample(1:12,15,replace=T)-> mm
-str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates   #yy取三位 如果有不足 左側補0
 twDates
 ```
 
@@ -73,7 +82,7 @@ twDates2
 
 
 ```{r}
-str_replace_all(twDates,"(民國)|(月)","")
+str_replace_all(twDates,"(民國)|(月)","")  
 ```
 
 
@@ -103,6 +112,7 @@ monthList
 
 unlist(monthList) -> monthVector # 將list疊成字串向量
 monthVector
+typeof(monthVector)
 
 str_c(as.character(westYears),monthVector,"01",sep = "-") -> westDates # 貼成YYYY-MM-DD 字串格式
 westDates
